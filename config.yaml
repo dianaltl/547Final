@@ -1,0 +1,31 @@
+baseURL: "https://547Final.com/" 
+languageCode: "en-us"
+title: "CISA Vulnerabilities"
+theme: "ananke"
+
+params:
+  author: "Group 3"
+  description: "A website built with Hugo and the Ananke theme."
+  githubURL: "https://github.com/dianaltl"
+
+menu:
+  main:
+    - identifier: "home"
+      name: "Home"
+      url: "/"
+      weight: 1
+    - identifier: "about"
+      name: "About"
+      url: "/about/"
+      weight: 2
+    - identifier: "posts"
+      name: "Posts"
+      url: "/posts/"
+      weight: 3
+
+taxonomies:
+  category: "categories"
+  tag: "tags"
+
+permalinks:
+  posts: "/:year/:month/:day/:slug/"
