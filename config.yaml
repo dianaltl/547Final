@@ -34,3 +34,5 @@ menu:
           name: "Post 2"
           url: "/posts/post2/"
           weight: 2
+
+taxonomies: {}
