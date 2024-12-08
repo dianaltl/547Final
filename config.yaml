@@ -2,6 +2,8 @@ baseURL: "https://547Final.com/"
 languageCode: "en-us"
 title: "CISA Vulnerabilities"
 theme: "ananke"
+build:
+  hugoVersion: "0.119.0"
 
 params:
   author: "Group 3"
