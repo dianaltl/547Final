@@ -22,6 +22,10 @@
 
 
 
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
     
 
     
@@ -53,7 +57,8 @@
   <meta name="twitter:title" content="CISA Vulnerabilities">
   <meta name="twitter:description" content="A website built with Hugo and the Ananke theme.">
 
-	
+	<link rel="stylesheet" href="/css/_styles.css">
+
   </head><body class="ma0 avenir bg-near-white development">
 
     
@@ -69,36 +74,38 @@
     </a>
     <div class="flex-l items-center">
       
-
-      
         <ul class="pl0 mr3">
           
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="/" title="Home page">
-              Home
-            </a>
-          </li>
           
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="/about/" title="About page">
-              About
-            </a>
-          </li>
+            
+              <li class="list f5 f4-ns fw4 dib pr3">
+                <a class="hover-white no-underline white-90" href="/" title="Home page">
+                  Home
+                </a>
+              </li>
+            
           
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">
-              Posts
-            </a>
-          </li>
+            
+              <li class="list f5 f4-ns fw4 dib pr3">
+                <a class="hover-white no-underline white-90" href="/about/" title="About page">
+                  About
+                </a>
+              </li>
+            
+          
+            
+              <li class="list f5 f4-ns fw4 dib pr3">
+                <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">
+                  Posts
+                </a>
+              </li>
+            
           
         </ul>
       
-      <div class="ananke-socials"></div>
-
     </div>
   </div>
 </nav>
-
       <div class="tc-l pv3 ph3 ph4-ns">
         <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
           CISA Vulnerabilities
@@ -111,22 +118,63 @@
 
     <main class="pb7" role="main">
       
-  <article class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray">
-      
-    </article>
+<div class="tc ph3 ph4-ns">
+    <h1 class="f3 f2-m f1-l fw2 black-90 mv3">CISA Vulnerabilities Database</h1>
+    
+    <div class="w-100 mw6 center pa3">
+        <select id="vulnCategory" class="w-100 pa2 mb3 ba b--black-20 br2">
+            <option value="" disabled selected>Select Vulnerability Category</option>
+            <option value="Critical">Critical Vulnerabilities</option>
+            <option value="High">High Vulnerabilities</option>
+            <option value="Medium">Medium Vulnerabilities</option>
+            <option value="Low">Low Vulnerabilities</option>
+        </select>
+
+        <div id="results" class="mt4">
+            
+        </div>
+    </div>
+</div>
+
+
+<script>
+document.getElementById('vulnCategory').addEventListener('change', async function() {
+    const category = this.value;
+    const resultsDiv = document.getElementById('results');
     
     
+    resultsDiv.innerHTML = 'Loading...';
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
+    try {
+        const response = await fetch(`/api/vulnerabilities?category=${category}`);
+        const data = await response.json();
+        
+        
+        if (data.length === 0) {
+            resultsDiv.innerHTML = 'No vulnerabilities found for this category.';
+            return;
+        }
+        
+        
+        const resultsHTML = data.map(vuln => `
+            <div class="pa3 mb3 ba b--black-10 br2 bg-white">
+                <h3 class="f4 mv2">${vuln.title}</h3>
+                <p class="f6 gray mv1">CVE: ${vuln.cve}</p>
+                <p class="f6 mv2">${vuln.description}</p>
+                <div class="f6 mv1">
+                    <span class="mr3">Severity: ${vuln.severity}</span>
+                    <span>Published: ${new Date(vuln.published_date).toLocaleDateString()}</span>
+                </div>
+            </div>
+        `).join('');
+        
+        resultsDiv.innerHTML = resultsHTML;
+    } catch (error) {
+        resultsDiv.innerHTML = 'Error loading vulnerabilities. Please try again.';
+        console.error('Error:', error);
+    }
+});
+</script>
 
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">

@@ -7,7 +7,8 @@ params:
   author: "Group 3"
   description: "A website built with Hugo and the Ananke theme."
   githubURL: "https://github.com/dianaltl"
-
+  custom_css: ["css/custom.css"]
+  
 menu:
   main:
     - identifier: "home"
@@ -22,10 +23,12 @@ menu:
       name: "Posts"
       url: "/posts/"
       weight: 3
-
-taxonomies:
-  category: "categories"
-  tag: "tags"
-
-permalinks:
-  posts: "/:year/:month/:day/:slug/"
+      children:
+        - identifier: "post1"
+          name: "Post 1"
+          url: "/posts/post1/"
+          weight: 1
+        - identifier: "post2"
+          name: "Post 2"
+          url: "/posts/post2/"
+          weight: 2

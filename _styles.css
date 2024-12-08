@@ -1,20 +1,40 @@
-/* Put your custom styles here and run `npm start` from the "src" directory on */
-
-#TableOfContents ul li {
-  margin-bottom: 1em;
+/* Dropdown styling */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
 }
 
-.lh-copy blockquote {
+nav ul li {
+  position: relative;
+  margin-right: 20px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 0;
+}
+
+.dropdown-content li {
   display: block;
-  font-size: .875em;
-  margin-left: 2rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  border-left: 4px solid #ccc;
-  padding-left: 1rem;
-
 }
 
-.nested-links a{
-  overflow-wrap: break-word;
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+li:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #575757;
 }

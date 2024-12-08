@@ -1,7 +1,7 @@
 name: 547Final
 
 services:
-  server:
+  hugo:
     image: hugomods/hugo:exts
     command: hugo server --bind 0.0.0.0
     volumes:
@@ -9,3 +9,12 @@ services:
       - C:/Users/ual-laptop/hugo_cache:/tmp/hugo_cache
     ports:
       - 1313:1313
+
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb+srv://doadmin:g82e75ZHyKn3406G@group3-db-bab860b8.mongo.ondigitalocean.com/admin?tls=true&authSource=admin
+    volumes:
+      - .:/app
