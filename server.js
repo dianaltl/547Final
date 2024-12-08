@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb');
 const app = express();
 
 const mongoUrl = 'mongodb+srv://doadmin:g82e75ZHyKn3406G@group3-db-bab860b8.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=group3-db';
-const dbName = 'admin';
+const dbName = 'csaf_data';
 
 app.get('/api/vulnerabilities', async (req, res) => {
     const { category } = req.query;
